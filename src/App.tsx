@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import useAuth from "@/hooks/useAuth.js";
+import useAuth from "@/hooks/useAuth.ts";
+import AuthContext from '@/contexts/authContext';
+
+import Users from '@/components/Users.tsx';
 
 function App() {
   const [auth, setAuth] = useState({ "error": "Unauthorized" });
@@ -7,12 +10,21 @@ function App() {
     useAuth('superuser', 'superuser').then((data: any) => setAuth(data));
   }, []);
   
+  const [token, setToken] = useState(null);
+  useEffect(() => {
+    if (!auth.error)
+      setToken(auth);
+  }, [auth]);
+  
   return (
-    <div className="App">
-      <div className="container">
-        { (!auth.error) ? <h1> Верные </h1> : <h1> Неверные логин/пароль </h1> }
+    <AuthContext.Provider value={auth} >
+      <div className="App">
+        <div className="container">
+          { (!auth.error) ? <Users /> : <h1> Неверные логин/пароль </h1> }
+        </div>
       </div>
-    </div>
+    </AuthContext.Provider>
+
   )
 }
 
