@@ -7,15 +7,12 @@ import App from '@/App';
 function Auth() {
   const [auth, setAuth] = useState({ "error": "Unauthorized" });
   useEffect(() => {
+    // сюда можно было бы вставить загрузку/сохранения токена в куки, 
+    // чтобы кадый раз не авторизовываться по новой. 
+    // но в данном проекте у нас логин/пароль захардкожены.
     useAuth('superuser', 'superuser').then((data: any) => setAuth(data));
   }, []);
-  
-  const [token, setToken] = useState(null);
-  useEffect(() => {
-    if (!auth.error)
-      setToken(auth);
-  }, [auth]);
-  
+
   return (
     <AuthContext.Provider value={auth} >
       <div className="App">
@@ -24,7 +21,6 @@ function Auth() {
         </div>
       </div>
     </AuthContext.Provider>
-
   )
 }
 

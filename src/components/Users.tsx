@@ -2,11 +2,14 @@ import { useEffect, useState } from "react";
 import useAPI from '@/hooks/useAPI';
 import User from "./User";
 
+import IUser from "@/interfaces/IUser";
+
 import '@/assets/styles/tables.scss';
 
+
 function Table() {
-    const [users, setUsers] = useState([]);
-    const fetch = useAPI('GET', '/account');
+    const [users, setUsers] = useState<IUser[]>([]);
+    const fetch = useAPI('GET', 'account');
     useEffect(() => {
         fetch.then(data => setUsers(data));
     }, []);
@@ -23,7 +26,7 @@ function Table() {
                 <p className="table-title__item icon">Изображения</p>
             </div>
 
-            { users.map(user => <User key={user.id} data={user} />)}
+            { users.map(user => <User key={user.id} user={user} />)}
         
         </div>
     )

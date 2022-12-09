@@ -1,5 +1,6 @@
 import useToken from './useToken';
-const host = 'http://23.111.202.224:8094';
+
+export const host: String = 'http://23.111.202.224:8094/';
 
 async function useAPI(method: string, url: string) {
     const { token } = useToken();

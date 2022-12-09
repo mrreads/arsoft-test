@@ -1,5 +1,6 @@
-async function useAuth(email: string, password: string): Promise<any> {
+import { host } from './useAPI';
 
+async function useAuth(email: string, password: string): Promise<any> {
     let headers: Headers = new Headers();
     headers.append("Content-Type", "application/json");
 
@@ -16,7 +17,7 @@ async function useAuth(email: string, password: string): Promise<any> {
       redirect: 'follow'
     };
 
-    const response: Response = await fetch("http://23.111.202.224:8094/auth/login", request);
+    const response: Response = await fetch(`${host}auth/login`, request);
     return await response.json();
 }
 
