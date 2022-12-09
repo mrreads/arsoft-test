@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useAPI from '@/hooks/useAPI';
+import { host, request } from "@/hooks/useToken";
 
 import User from "./User";
 import Paggination from './Paggination';
@@ -11,19 +11,18 @@ import '@/assets/styles/tables.scss';
 function Table() {
     const [currentPage, setCurrentPage] = useState(1);
     const [maxPages, setMaxPages] = useState(1);
-    const count = useAPI('GET', `account`);
 
     const [users, setUsers] = useState<IUser[]>([]);
-    const fetch = useAPI('GET', `account/api?page=${currentPage - 1}`);
     useEffect(() => {
+        const count = (async () => fetch(`${host}account`, request).then(res => res.json()))();
         count.then(data => setMaxPages(Math.ceil(data.length / 3)));
-        fetch.then(data => setUsers(data));
     }, []);
-
-    useEffect(() => {
-        fetch.then(data => setUsers(data));
-    }, [currentPage]);
     
+    
+    useEffect(() => {
+        (async () => fetch(`${host}account/api?page=${currentPage - 1}`, request).then(res => res.json()))().then(data => setUsers(data));
+    }, [currentPage]);
+
     const prevPage = (): void => {
         if (currentPage > 1)
             setCurrentPage(currentPage - 1)
