@@ -1,11 +1,10 @@
 .table {
     &-title, &-user {
         display: grid;
-        grid-template-columns: 150px 150px 150px 200px 1fr 150px 50px 50px;
+        grid-template-columns: 175px 150px 150px 200px 1fr 150px 50px 50px;
         gap: 0 15px;
 
         border-bottom: 1px solid #000000;
-
         &__item {
             padding: 20px 15px;
             
@@ -41,6 +40,19 @@
 
             &.icon {
                 text-align: center;
+            }
+        }
+    }
+
+    counter-reset: list;
+    &-user {
+        counter-increment: list;
+        &__item {
+            &.count {
+                &::before {
+                    content: counter(list);
+                    margin-right: 25px;
+                }
             }
         }
     }

@@ -1,0 +1,23 @@
+.paggination {
+    display: flex;
+    flex-flow: row nowrap;
+
+    &__title, &__prev, &__next, &__item {
+        border: 1px solid black;
+        padding: 10px 20px;
+        transition: .3s all;
+    }
+
+
+    &__prev, &__next, &__item {
+        cursor: pointer;
+        &:hover {
+            background-color: #0062ff4A;
+        }
+    }
+    &__item {
+        &.active {
+            background-color: #0062ff;
+        }
+    }
+}

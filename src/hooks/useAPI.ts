@@ -4,7 +4,7 @@ export const host: String = 'http://23.111.202.224:8094/';
 
 async function useAPI(method: string, url: string) {
     const { token } = useToken();
-
+    
     let headers: Headers = new Headers();
     headers.append("Authorization", `Bearer_${token}`);
 
