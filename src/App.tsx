@@ -1,7 +1,10 @@
-import React from 'react';
-import Users from '@/components/Users.tsx';
+import React, { useState } from 'react';
+import Users from '@/components/Users';
+
+import '@/assets/styles/popup.scss';
 
 function App() {
+
     return (
     <React.Fragment>
         <Users />

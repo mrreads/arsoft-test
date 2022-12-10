@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import useAuth from "@/hooks/useAuth.ts";
+import useAuth from "@/hooks/useAuth";
 import AuthContext from '@/contexts/authContext';
 
 import App from '@/App';
 
+import IAuth from "@/interfaces/IAuth";
+
 function Auth() {
-  const [auth, setAuth] = useState({ "error": "Unauthorized" });
+  const [auth, setAuth] = useState<IAuth>({ error: "Unauthorized" });
   useEffect(() => {
     // сюда можно было бы вставить загрузку/сохранения токена в куки, 
     // чтобы кадый раз не авторизовываться по новой. 

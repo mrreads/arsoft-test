@@ -1,2 +1,3 @@
 import { createContext } from "react";
-export default createContext(null);
+import IAuth from "@/interfaces/IAuth";
+export default createContext<IAuth>({});

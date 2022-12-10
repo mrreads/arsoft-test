@@ -1,4 +1,4 @@
-export const host: String = 'http://23.111.202.224:8094/';
+export const host: string = 'http://23.111.202.224:8094/';
 
 export let headers: Headers = new Headers({"Content-Type": "application/json"});
 
