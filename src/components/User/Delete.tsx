@@ -7,11 +7,17 @@ import PopupDelete from '@/components/Popup/PopupDelete';
 
 interface IProps {
     "email": string,
-    "rerender": () => void
+    "rerender": () => void,
+    "edit": (id: null) => void
 }
 
-function Delete({ email, rerender }: IProps) {
+function Delete({ email, rerender, edit }: IProps) {
     const [popupActive, setPopupActive] = useState(false);
+
+    const showPopup =() => {
+        edit(null);
+        setPopupActive(true)
+    }
 
     const deleteUser = async () => {
         await fetch(`${host}account/${email}`, { ...request, method: "DELETE" });
@@ -22,7 +28,7 @@ function Delete({ email, rerender }: IProps) {
     return (
         <>
             { (popupActive) ? <PopupDelete deleteUser={deleteUser} setPopupActive={setPopupActive} /> : null }
-            <div className="table-user__item icon" onClick={() => setPopupActive(true)}> <img src={icon} /> </div>
+            <div className="table-user__item icon" onClick={showPopup}> <img src={icon} /> </div>
         </>
     );
 }

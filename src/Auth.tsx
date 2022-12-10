@@ -14,7 +14,11 @@ function Auth() {
     // но в данном проекте у нас логин/пароль захардкожены.
     useAuth('superuser', 'superuser').then((data: any) => setAuth(data));
   }, []);
-
+  
+  // useEffect(() => {
+  //   console.log(auth);
+  // }, [auth]);
+  
   return (
     <AuthContext.Provider value={auth} >
       <div className="App">

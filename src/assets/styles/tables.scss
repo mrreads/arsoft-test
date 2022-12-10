@@ -55,5 +55,21 @@
                 }
             }
         }
+
+        &__input, &__select {
+            margin: 15px 0;
+            padding: 5px;
+        }
+
+        &__button {
+            font-size: 17px;
+            margin: 10px 0px;
+            padding: 5px 15px;
+            color: #FFFFFF;
+            border: 1px solid black;
+            transition: .3s all;
+            background-color: #0062ff;
+            cursor: pointer;
+        }
     }
 }
