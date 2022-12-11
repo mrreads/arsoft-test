@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler  } from "react-hook-form";
-import { host, request } from "@/hooks/useToken";
+import { host, port, request } from "@/hooks/useToken";
 
 import IUser from '@/interfaces/IUser';
 interface IProps {
@@ -26,7 +26,7 @@ function EditUser({ user, rerender, edit }: IProps) {
     const role: string = (roles.map(r => r.name).includes("ROLE_SUPERUSER")) ? "ROLE_SUPERUSER" : (roles.map(r => r.name).includes("ROLE_ADMIN")) ? "ROLE_ADMIN" : "ROLE_USER";
 
     const { register, handleSubmit } = useForm<Inputs>();
-    const onSubmit: SubmitHandler<Inputs> = async form => {
+    const editUser: SubmitHandler<Inputs> = async form => {
         let body: BodyInit = JSON.stringify({
             "id": id,
             "name": form.name,
@@ -34,12 +34,12 @@ function EditUser({ user, rerender, edit }: IProps) {
             "email": form.email,
             "roles": (form.roles == 'ROLE_ADMIN') ? [ {"name": "ROLE_USER"},{"name": "ROLE_ADMIN"}] : [{"name": "ROLE_USER"}]
         });
-        await fetch(`${host}account/edit`, { ...request, method: "PUT", body: body })
+        await fetch(`${host}:${port}/account/edit`, { ...request, method: "PUT", body: body })
         .then(res => { if (res.ok == true) { rerender(); edit(null) } });     
     }
 
     return (
-        <form className="table-user" onSubmit={handleSubmit(onSubmit)}>
+        <form className="table-user" onSubmit={handleSubmit(editUser)}>
             <input type="text" className="table-user__input count" defaultValue={name} {...register("name", { required: true })} />
             <input type="text" className="table-user__input" defaultValue={lastName} {...register("lastName", { required: true })} />
             <input type="text" className="table-user__input" {...register("email", { required: true })} />

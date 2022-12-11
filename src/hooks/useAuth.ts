@@ -1,4 +1,5 @@
-export const host: string = 'http://23.111.202.224:8094/';
+export const host: string = 'http://23.111.202.224';
+export const port: string = '8094';
 
 export let headers: Headers = new Headers({"Content-Type": "application/json"});
 
@@ -16,7 +17,7 @@ async function useAuth(email: string, password: string): Promise<any> {
       "password": password
     });
     
-    const response: Response = await fetch(`${host}auth/login`, { ...request, method: 'POST', body: body  });
+    const response: Response = await fetch(`${host}:${port}/auth/login`, { ...request, method: 'POST', body: body  });
     const data = await response.json();
     await headers.append("Authorization", `Bearer_${data.token}`);
     return await data;

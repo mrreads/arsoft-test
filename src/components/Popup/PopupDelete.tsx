@@ -1,5 +1,3 @@
-import { useRef } from 'react';
-
 interface IProps {
     "deleteUser": () => void
     "setPopupActive": (bool: boolean) => void

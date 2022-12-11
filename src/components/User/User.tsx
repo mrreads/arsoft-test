@@ -1,4 +1,4 @@
-import { host, request } from "@/hooks/useToken";
+import { host, port, request } from "@/hooks/useToken";
 
 import Delete from '@/components/User/Delete';
 
@@ -6,6 +6,7 @@ import saveIcon from '@/assets/images/icons/save.png';
 import editIcon from '@/assets/images/icons/edit.png';
 
 import IUser from '@/interfaces/IUser';
+
 interface IProps {
     "user": IUser,
     "rerender": () => void,
@@ -24,7 +25,7 @@ function User({ user, rerender, edit }: IProps) {
     
     const downloadArchive = async () => {
         edit(null);
-        await fetch(`${host}screenshot/arch/${id}`, request)
+        await fetch(`${host}:${port}/screenshot/arch/${id}`, request)
         .then(res => res.json())
         .then(data => console.log(data));
     }
@@ -39,7 +40,6 @@ function User({ user, rerender, edit }: IProps) {
             <div className="table-user__item icon" onClick={downloadArchive}> <img src={saveIcon} /> </div>
             <Delete email={email} rerender={rerender} edit={edit} />
             <div className="table-user__item icon" onClick={() => edit(id)}> <img src={editIcon} /> </div>
-            
         </div>
     )
 }

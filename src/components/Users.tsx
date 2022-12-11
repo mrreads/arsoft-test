@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { host, request } from "@/hooks/useToken";
+import { host, port, request } from "@/hooks/useToken";
 
 import User from "@/components/User/User";
-import EditUser from "./User/EditUser";
+import EditUser from "@/components/User/EditUser";
 import Paggination from '@/components/Paggination';
+
+import Create from "@/components/User/Create";
 
 import IUser from "@/interfaces/IUser";
 
@@ -18,7 +20,7 @@ function Users() {
 
     const [users, setUsers] = useState<IUser[]>([]);
     useEffect(() => {
-        const count = (async () => fetch(`${host}account`, request).then(res => res.json()))();
+        const count = (async () => fetch(`${host}:${port}/account`, request).then(res => res.json()))();
         count.then(data => setMaxPages(Math.ceil(data.length / 3)));
     }, [toggleRerender]);
     
@@ -26,7 +28,7 @@ function Users() {
     
     useEffect(() => {
         (currentPage > maxPages) ? setCurrentPage(maxPages) : null; // если произошёл ререндер и страниц стало меньше
-        (async () => fetch(`${host}account/api?page=${currentPage - 1}`, request).then(res => res.json()))().then(data => setUsers(data));
+        (async () => fetch(`${host}:${port}/account/api?page=${currentPage - 1}`, request).then(res => res.json()))().then(data => setUsers(data));
         setEditUser(null);
     }, [currentPage, toggleRerender]);
 
@@ -64,6 +66,7 @@ function Users() {
             
             <div className="bottom_panel">
                 <Paggination currentPage={currentPage} maxPages={maxPages} prevPage={prevPage} nextPage={nextPage} setCurrentPage={setCurrentPage} />
+                <Create rerender={rerender} edit={setEditUser}  />
             </div>
 
         </div>

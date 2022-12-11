@@ -1,9 +1,19 @@
 .popup {
 
+    display: flex;
+    flex-flow: column nowrap;
+
     padding: 150px 75px;
     padding-bottom: 50px;
     background-color: #e5e5e5;
     border: 3px solid #000000;
+
+    &-title {
+        margin-bottom: 25px;
+    }
+    &.create {
+        padding: 25px;
+    }
 
     &-wrapper {
         position: fixed;
@@ -36,4 +46,34 @@
             cursor: pointer;
         }
     }
+
+    &-input {
+        &__title {
+            & .error {
+                color: #f23838;
+                font-size: 14px;
+                margin-left: 5px;
+            }
+        }
+        &__item, &__select {
+            margin: 5px 0;
+            padding: 5px;
+            font-size: 18px;
+            width: 100%;
+
+            margin-bottom: 15px;
+
+            & option[value=""] {
+                display: none;
+            }
+            
+            &.error {
+                color: #f23838;
+                & option {
+                    color: #000000;
+                }
+            }
+        }
+    }
+
 }

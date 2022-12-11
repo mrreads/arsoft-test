@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { host, request } from "@/hooks/useToken";
+import { host, port, request } from "@/hooks/useToken";
 import icon from '@/assets/images/icons/remove.png';
 
 import PopupDelete from '@/components/Popup/PopupDelete';
@@ -20,7 +20,7 @@ function Delete({ email, rerender, edit }: IProps) {
     }
 
     const deleteUser = async () => {
-        await fetch(`${host}account/${email}`, { ...request, method: "DELETE" });
+        await fetch(`${host}:${port}/account/${email}`, { ...request, method: "DELETE" });
         await setPopupActive(false);
         await rerender();
     }
