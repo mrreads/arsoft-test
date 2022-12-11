@@ -41,6 +41,16 @@
             &.icon {
                 text-align: center;
             }
+            &:not(.icon) {
+                cursor: pointer;
+                &.active {
+                    &::after {
+                        content: "<>";
+                        transform: rotate(90deg);
+                        margin-left: 5px;
+                    }
+                }
+            }
         }
     }
 

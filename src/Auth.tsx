@@ -15,15 +15,19 @@ function Auth() {
     useAuth('superuser', 'superuser').then((data: any) => setAuth(data));
   }, []);
   
-  // useEffect(() => {
-  //   console.log(auth);
-  // }, [auth]);
-  
+  const Error = () => {
+    return (
+    <div className="auth"> 
+      <h1> Неверные логин/пароль </h1> 
+      <p> Или озможно браузер блокирует запросы к API </p> 
+    </div>);
+  };
+
   return (
     <AuthContext.Provider value={auth} >
       <div className="App">
         <div className="container">
-          { (!auth.error) ? <App /> : <h1 className="title"> Неверные логин/пароль </h1> }
+          { (!auth.error) ? <App /> : <Error /> }
         </div>
       </div>
     </AuthContext.Provider>

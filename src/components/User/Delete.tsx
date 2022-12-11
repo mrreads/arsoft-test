@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { host, port, request } from "@/hooks/useToken";
-import icon from '@/assets/images/icons/remove.png';
 
 import PopupDelete from '@/components/Popup/PopupDelete';
 
+import icon from '@/assets/images/icons/remove.png';
 
 interface IProps {
     "email": string,

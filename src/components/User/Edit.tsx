@@ -2,6 +2,7 @@ import { useForm, SubmitHandler  } from "react-hook-form";
 import { host, port, request } from "@/hooks/useToken";
 
 import IUser from '@/interfaces/IUser';
+
 interface IProps {
     "user": IUser,
     "rerender": () => void,
@@ -21,7 +22,7 @@ interface Inputs {
     roles: string,
 };
 
-function EditUser({ user, rerender, edit }: IProps) {
+function Edit({ user, rerender, edit }: IProps) {
     const { id, email, user: { lastName, name }, organization: { companyTitle }, roles } = user;
     const role: string = (roles.map(r => r.name).includes("ROLE_SUPERUSER")) ? "ROLE_SUPERUSER" : (roles.map(r => r.name).includes("ROLE_ADMIN")) ? "ROLE_ADMIN" : "ROLE_USER";
 
@@ -48,10 +49,10 @@ function EditUser({ user, rerender, edit }: IProps) {
                 <option value="ROLE_ADMIN"> { Role.ROLE_ADMIN } </option>
             </select>
             <p className="table-user__item"> { companyTitle }</p>
-
-            <input type="submit"  className="table-user__button" value="Обновить" />
+            
+            <input type="submit" className="table-user__button" value="Обновить" />
         </form>
     )
 }
 
-export default EditUser;
+export default Edit;

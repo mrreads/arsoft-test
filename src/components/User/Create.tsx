@@ -1,5 +1,5 @@
-import PopupCreate from '@/components/Popup/PopupCreate';
 import { useState } from 'react';
+import PopupCreate from '@/components/Popup/PopupCreate';
 
 interface IProps {
     "rerender": () => void,

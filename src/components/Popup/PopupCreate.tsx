@@ -38,11 +38,13 @@ function PopupCreate({ rerender, setPopupActive }: IProps) {
     const [companies, setCompanies] = useState<ICompanies["data"]>();
 
     useEffect(() => {
+        // с 8094 порта данные не брались
         (async () => fetch(`${host}:8093/organization`, request).then(res => res.json()))().then(res => setCompanies(res.data));
     }, []);
 
     const createUser: SubmitHandler<Inputs> = async form => {
-        const url = (form.roles == 'ROLE_ADMIN') ? "reg/admin" : "reg/user";
+        const url = (form.roles == 'ROLE_ADMIN') ? "auth/reg/admin" : "reg/user";
+        //const port = (form.roles == 'ROLE_ADMIN') ? "8093" : "8094"; // если потребуется разный порт для юзера и админа
         let headers = headersToken;
         headers.delete("Content-Type");
         headers.append("Content-Type", `application/x-www-form-urlencoded`);
@@ -50,6 +52,7 @@ function PopupCreate({ rerender, setPopupActive }: IProps) {
         let data = new URLSearchParams();
         data.append("companyTitle", form.companyTitle);
         data.append("name", form.name);
+        data.append("lastName", form.lastName);
         data.append("lastname", form.lastName);
         data.append("email", form.email);
         data.append("password", form.password);
